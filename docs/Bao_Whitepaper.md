@@ -26,13 +26,13 @@
 
 $BAO is a community-driven meme coin on the Solana blockchain. We believe crypto belongs to every participant — not a few whales.
 
-Through a weekly fair lottery, $BAO returns **50% of project income (in SOL)** to the community, giving every holder a chance to be the week's lucky winner. All tokens are added to the liquidity pool at launch and the supply is fixed; the team holds no reserved allocation, fully aligned with community interests.
+Through a weekly fair lottery based on the SHA256 algorithm, $BAO returns **50% of project income (in SOL)** to the community, giving every holder a chance to be the week's lucky winner. All tokens are added to the liquidity pool at launch and the supply is fixed; the team holds no reserved allocation, fully aligned with community interests.
 
 **中文：**
 
 $BAO 是一个基于 Solana 区块链的社区驱动型 meme 币。我们相信加密货币的精神属于每一个参与者——而不是少数巨鲸。
 
-通过每周公平抽奖机制，$BAO 将项目收入的 **50%（以 SOL）** 回馈社区，让每个持仓者都有机会成为当周的幸运儿。所有代币在发行时全部投入流动性池、发行量固定，项目方无预留名额，与社区利益完全绑定。
+通过基于 SHA256 算法的每周公平抽奖机制，$BAO 将项目收入的 **50%（以 SOL）** 回馈社区，让每个持仓者都有机会成为当周的幸运儿。所有代币在发行时全部投入流动性池、发行量固定，项目方无预留名额，与社区利益完全绑定。
 
 ---
 
@@ -121,23 +121,33 @@ Project income
 ### 6.1 Eligibility
 - Addresses with market value ≥ **$100** at snapshot
 - **One ticket** per address, one person one vote
+- The community group is where results are published, **not a sign-up portal**
 
 ### 6.2 Snapshot & Random Source
 | Item | Rule |
 |---|---|
 | Snapshot | Every Monday 00:00:00 UTC |
-| Seed | First confirmed tx hash after Monday 00:00 (slot-anchored), permanently retrievable |
+| Seed | First confirmed tx hash after Monday 00:00, permanently retrievable on-chain |
 
 ### 6.3 Sorting
+For each qualifying address compute:
+
 ```
 sort_key(Ai) = SHA256(address + tx hash)
-Lexicographic order, assign numbers sequentially
 ```
+
+Number addresses by ascending lexicographic order of `sort_key` (1..N, N = total tickets).
 
 ### 6.4 Draw
 ```
-r = int(tx hash, 16) % total tickets + 1
-3 winners split the weekly pool equally
+r = int(tx hash, 16) % N + 1
+winning numbers = r, r+1, r+2  (mod N; wraps back to 1)
+```
+
+Starting from #r, take 3 winners in cyclic order; they split the weekly pool equally:
+
+```
+amount_each = prize_sol / 3
 ```
 
 **中文：**
@@ -145,23 +155,33 @@ r = int(tx hash, 16) % total tickets + 1
 ### 6.1 参与资格
 - 快照时持仓市值 ≥ **$100** 的地址
 - 每个地址 **1 张券，一人一票**
+- 社区群是**公布结果的场所**，不是报名入口
 
 ### 6.2 快照与随机源
 | 项 | 规则 |
 |---|---|
 | 快照时点 | 每周一 00:00:00 UTC |
-| 随机种子 | 周一 00:00 后第一个确认交易哈希（slot 锚定），永久可查 |
+| 随机种子 | 周一 00:00 后第一个确认交易哈希，链上永久可查 |
 
 ### 6.3 排号
+对每个合格地址计算：
+
 ```
 sort_key(Ai) = SHA256(地址 + 交易哈希)
-按字典序排列，依次分配号码
 ```
+
+按 `sort_key` **字典序升序**编号（1..N，N=总票数）。
 
 ### 6.4 开奖
 ```
-r = int(交易哈希, 16) % 总票数 + 1
-抽 3 名中奖者，平分当周奖池
+r = int(交易哈希, 16) % N + 1
+中奖号 = r, r+1, r+2（对 N 取模，超出回到 1）
+```
+
+从第 r 号起**循环取模**抽 3 名中奖者，平分当周奖池：
+
+```
+amount_each = prize_sol / 3
 ```
 
 ---
@@ -174,7 +194,7 @@ r = int(交易哈希, 16) % 总票数 + 1
 - Seed is a future tx hash, unpredictable before announced
 - List locked before seed, no one can inject addresses
 - Tx hash permanently on-chain, verifiable anytime
-- **Anti-Sybil**: within 2 hops, same-source addresses merge into one cluster = **1 ticket**; beyond 2 hops via community report + public review; unflagged addresses participate normally
+- **Anti-Sybil**: on-chain address-link detection merges suspected duplicate addresses into one ticket (one person, one vote); exceptional cases are handled via community report and public review; unflagged addresses participate normally
 
 **中文：**
 
@@ -182,7 +202,7 @@ r = int(交易哈希, 16) % 总票数 + 1
 - 随机种子是未来产生的交易哈希，公布前不可预测
 - 名单先锁定、种子后产生，无人能塞名单
 - 交易哈希永久上链，任何时间可读取复核
-- **防女巫**：回溯 2 跳内同源地址，整簇合并计 **1 张券**；2 跳以外靠社区举报 + 公开复核；未被标记的地址正常参与
+- **防女巫**：通过链上地址关联检测，将疑似重复来源的地址合并计 **1 张券**（一人一票）；异常情况经社区举报与公开复核处理，未被标记的地址正常参与
 
 ---
 
