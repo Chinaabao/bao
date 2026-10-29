@@ -1,8 +1,9 @@
 # $BAO Logo 标准规范 / Brand Logo Standard
 
 **品牌 / Brand**：宝（Bao）· $BAO · 国风功夫熊猫（Chinese-style kung fu panda）
-**Logo 性质 / Type**：纯图形标（圆形徽章·斗笠熊猫），不含文字 / Pure graphic mark (circular badge · straw-hat panda), no text
-**定稿日期 / Date finalized**：2026-10-29
+**Logo 性质 / Type**：纯图形标（头像标 · 斗笠国风熊猫半身像），不含文字 / Pure graphic mark (head mark · straw-hat Chinese panda bust), no text
+**定稿日期 / Date finalized**：2026-10-30
+**主标 / Master**：https://aka.doubaocdn.com/s/MFBVu32AVM
 **双语对照版：每节英文在前，中文在后 / Bilingual: English first, then Chinese within each section**
 
 ---
@@ -11,15 +12,15 @@
 
 **English：**
 
-The official `$BAO` mark is a **circular badge-style graphic symbol**: inside a black ring sits the front face of the kung fu panda "Bao" — wearing a Chinese straw hat (black base, red rim), black rounded eye patches, a round nose, and a smiling mouth, with a single red collar line at the neck. The palette is black-and-white dominated, accented with a touch of Chinese red. The overall look is dignified, minimalist and culturally Chinese.
+The official `$BAO` mark is a **panda bust / head mark**: the front face of the kung fu panda "Bao" wearing a **brown woven straw hat** with **jade-green ties** (black ears visible at the sides), a white face with black rounded eye patches, round brown eyes, a black nose, a smiling mouth, and soft pink blush on the cheeks. It wears a **jade-green Chinese robe** whose collar has a white trim and fine **cloud-pattern embroidery**. The background is pure white. The overall look is cute, Chinese-style and friendly.
 
-This graphic mark is the single core identity (master). It is recognizable without any text and stays crisp even at very small sizes.
+This head mark is the single core identity (master). It is recognizable without any text and stays crisp at small sizes.
 
 **中文：**
 
-`$BAO` 官方标识为一枚**圆形徽章式图形标**：黑色圆环内为功夫熊猫「宝」的正面头像——头戴中式斗笠（黑底红边）、黑色圆润眼圈、圆鼻、微笑嘴，颈部一条红色领线。黑白为主，仅以少量中国红点睛。整体庄重大气、国风简约。
+`$BAO` 官方标识为**熊猫半身头像标**：功夫熊猫「宝」正面头像——头戴**棕褐色编织斗笠**（青绿系带、两侧露出黑色耳朵），白脸配黑色圆润眼圈、圆润棕色眼睛、黑色鼻头、微笑嘴、脸颊淡粉腮红；身着**青绿中式服饰**，领口白镶边并缀**精致云纹刺绣**。纯白背景。整体可爱国风、亲和友好。
 
-该图形标为唯一核心标识（母版）。不依赖任何文字即可识别，缩放到极小尺寸仍清晰。
+该头像标为唯一核心标识（母版）。不依赖任何文字即可识别，缩放到小尺寸依旧清晰。
 
 ---
 
@@ -29,25 +30,23 @@ This graphic mark is the single core identity (master). It is recognizable witho
 
 | Version | Description | Usage |
 |---|---|---|
-| **Color primary (standard)** | Ink black + Chinese red, white background | Official default; formal use, website, whitepaper cover |
-| **Black monochrome** | Pure black (white background) | Grayscale print, one-color materials, signatures, seal substitute |
-| **White reverse** | Pure white (black background) | Dark backgrounds, black materials, dark zones of live covers |
+| **Color primary (master)** | Jade-green robe + brown straw hat, white background | Official default; website, whitepaper cover, avatar |
+| Black monochrome | Pending — to be produced after master finalization | — |
+| White reverse | Pending — to be produced after master finalization | — |
 
-> Color primary: https://aka.doubaocdn.com/s/T3Q0FoUoMV
-> Black monochrome: https://aka.doubaocdn.com/s/FPccKQW3Fb
-> White reverse: https://aka.doubaocdn.com/s/9kGRBTgka9
+> Color primary (master): https://aka.doubaocdn.com/s/MFBVu32AVM
+> Monochrome / reverse versions will be produced once the master is finalized.
 
 **中文：**
 
 | 版本 | 说明 | 使用场景 |
 |---|---|---|
-| **彩色主标（标准版）** | 墨黑＋中国红，白底 | 官方默认，正式场合、官网、白皮书封面 |
-| **黑色单色版** | 纯黑（白底） | 灰度印刷、单色物料、签名档、公章替代 |
-| **白色反白版** | 纯白（黑底） | 深色背景、黑底物料、直播封面深色区 |
+| **彩色主标（标准版）** | 青绿中式服＋棕褐斗笠，白底 | 官方默认，官网、白皮书封面、头像 |
+| 黑色单色版 | 待主标定稿后另行制作 | — |
+| 白色反白版 | 待主标定稿后另行制作 | — |
 
-> 彩色主标：https://aka.doubaocdn.com/s/T3Q0FoUoMV
-> 黑色单色版：https://aka.doubaocdn.com/s/FPccKQW3Fb
-> 白色反白版：https://aka.doubaocdn.com/s/9kGRBTgka9
+> 彩色主标：https://aka.doubaocdn.com/s/MFBVu32AVM
+> 单色版／反白版将在主标最终确认后另行制作。
 
 ---
 
@@ -55,27 +54,33 @@ This graphic mark is the single core identity (master). It is recognizable witho
 
 **English：**
 
-The mark uses at most **3 colors** in total: Ink Black, Bao Red, and Pure White.
+The master mark palette:
 
 | Role | Name | HEX | RGB | Use |
 |---|---|---|---|---|
-| Primary | Ink Black | `#111111` | 17,17,17 | Ring, panda body, hat base |
-| Accent | Bao Red | `#CE1126` | 206,17,38 | Hat rim, neck line |
-| Support | White | `#FFFFFF` | 255,255,255 | Background, reverse-mark color |
+| Primary | Jade Green | `#2E7D5B` | 46,125,91 | Chinese robe, hat ties |
+| Secondary | Straw Brown | `#8A5A3B` | 138,90,59 | Woven straw hat |
+| Dark | Ink Black | `#1A1A1A` | 26,26,26 | Eye patches, nose |
+| Eye | Warm Brown | `#6B4A2F` | 107,74,47 | Eyes |
+| Blush | Soft Pink | `#F2B8AE` | 242,184,174 | Cheek blush |
+| Support | White | `#FFFFFF` | 255,255,255 | Face, robe trim, background |
 
-> The monochrome / reverse versions contain no Chinese red — only ink black and pure white.
+> These are representative standard values extracted from the finalized mark; the precise palette follows the design source file.
 
 **中文：**
 
-标识全局最多使用 **3 个色**：墨黑、中国红、纯白。
+主标配色：
 
 | 角色 | 名称 | HEX | RGB | 用途 |
 |---|---|---|---|---|
-| 主色 | 墨黑（Ink Black） | `#111111` | 17,17,17 | 圆环、熊猫主体、斗笠底 |
-| 强调色 | 中国红（Bao Red） | `#CE1126` | 206,17,38 | 斗笠边缘、颈部领线 |
-| 辅助色 | 纯白（White） | `#FFFFFF` | 255,255,255 | 背景、反白版图形色 |
+| 主色 | 青绿（Jade Green） | `#2E7D5B` | 46,125,91 | 中式服饰、斗笠系带 |
+| 辅色 | 棕褐（Straw Brown） | `#8A5A3B` | 138,90,59 | 编织斗笠 |
+| 深色 | 墨黑（Ink Black） | `#1A1A1A` | 26,26,26 | 眼圈、鼻头 |
+| 眼色 | 暖棕（Warm Brown） | `#6B4A2F` | 107,74,47 | 眼睛 |
+| 腮红 | 淡粉（Soft Pink） | `#F2B8AE` | 242,184,174 | 脸颊腮红 |
+| 辅助色 | 纯白（White） | `#FFFFFF` | 255,255,255 | 脸部、领口镶边、背景 |
 
-> 单色版／反白版中不出现中国红，只保留墨黑与纯白两色。
+> 以上为从定稿图提取的代表性规范色值；精确色值以设计源文件为准。
 
 ---
 
@@ -83,8 +88,8 @@ The mark uses at most **3 colors** in total: Ink Black, Bao Red, and Pure White.
 
 **English：**
 
-- **Standard canvas**: square 1:1 (recommended source 1024×1024 or 2048×2048).
-- **Badge diameter**: **72%** of canvas width (≈14% safe margin on each side).
+- **Standard canvas**: square 1:1 (source ≈1561×1560 or recommended 2048×2048).
+- The panda bust occupies roughly **80%** of the canvas height, with balanced clear margins at the top and sides.
 - **Minimum sizes**:
   - Screen / digital: **≥ 32px** (icon, avatar, favicon)
   - Print / materials: **≥ 20mm** (business card, packaging, seal)
@@ -92,8 +97,8 @@ The mark uses at most **3 colors** in total: Ink Black, Bao Red, and Pure White.
 
 **中文：**
 
-- **标准画幅**：正方形 1:1（推荐源文件 1024×1024 或 2048×2048）。
-- **圆形徽章直径**：占画布宽度的 **72%**（四周各留约 14% 安全留白）。
+- **标准画幅**：正方形 1:1（源文件约 1561×1560，推荐 2048×2048）。
+- 熊猫半身主体约占画面高度的 **80%**，顶部与两侧留有均衡留白。
 - **最小使用尺寸**：
   - 屏幕 / 数字：**≥ 32px**（图标、头像、favicon）
   - 印刷 / 物料：**≥ 20mm**（名片、包装、印章）
@@ -105,17 +110,15 @@ The mark uses at most **3 colors** in total: Ink Black, Bao Red, and Pure White.
 
 **English：**
 
-Keep clear space equal to **1/4 of the badge radius** (i.e. 1/8 of the badge diameter) around the mark; no text, image, line or other element may enter this area.
+Keep clear space of at least **1/6 of the mark height** around the bust; no text, image, line or other element may enter this area.
 
-- Clear-space width = **14%** of canvas width (consistent with badge margin).
-- When the color primary is used on a dark background, a white backing circle may be added outside the clear space, but it must not enter the clear space.
+- When the color primary is used on a dark background, a white backing may be added outside the clear space, but it must not enter the clear space.
 
 **中文：**
 
-标识四周必须保持**等于图形半径的 1/4** 的净空（即徽章直径的 1/8），区域内不得放置任何文字、图片、线条或其它元素。
+标识四周必须保持至少**图形高度 1/6** 的净空，区域内不得放置任何文字、图片、线条或其它元素。
 
-- 安全区宽度 = 画布宽的 **14%**（与徽章留白一致）。
-- 深色底上使用彩色主标时，安全区外可加白色衬底圆，但衬底不得进入安全区。
+- 深色底上使用彩色主标时，安全区外可加白底衬底，但衬底不得进入安全区。
 
 ---
 
@@ -124,18 +127,14 @@ Keep clear space equal to **1/4 of the badge radius** (i.e. 1/8 of the badge dia
 **English：**
 
 - Layout is based on a **centrally symmetric grid**: the hat apex, nose tip and collar midpoint lie on the same vertical axis.
-- The badge outer ring is a **perfect circle**, diameter = 72% of canvas width.
-- Panda head diameter ≈ **78%** of outer-ring diameter (≈11% clearance to the ring).
-- Hat width ≈ **60%** of outer-ring diameter; the red rim is a thin line (≈1.5% of ring diameter).
-- Accent ratio: Chinese red occupies < **5%** of the overall image — only a highlight.
+- Bust composition with moderate headroom above the hat; the hat, face and robe shoulders are balanced.
+- Accent ratio: the pink blush and jade ties occupy only a small portion — highlights, not dominant areas.
 
 **中文：**
 
-- 构图基于**中心对称网格**：斗笠顶点、鼻尖、领线中点三点位于同一垂直中轴线。
-- 徽章外环为**正圆**，直径 = 画布宽 72%。
-- 熊猫头部直径 ≈ 外环直径的 **78%**（头部贴圆环留白约 11%）。
-- 斗笠宽度 ≈ 外环直径的 **60%**，红边为细线（约外环直径的 1.5%）。
-- 强调色占比：中国红在整体画面中占比 < **5%**，仅作点睛。
+- 构图基于**中心对称网格**：斗笠顶点、鼻尖、领口中点三点位于同一垂直中轴线。
+- 半身构图，斗笠上方留适当天头，斗笠、脸部与服饰肩部比例均衡。
+- 强调色占比：粉腮红与青绿系带在画面中仅作点睛，不占主导。
 
 ---
 
@@ -144,7 +143,7 @@ Keep clear space equal to **1/4 of the badge radius** (i.e. 1/8 of the badge dia
 **English：**
 
 **Allowed:**
-- Color primary on white / light backgrounds; reverse on dark backgrounds; monochrome on any grayscale occasion.
+- Color primary on white / light backgrounds.
 - Proportional scaling (keep aspect ratio unchanged).
 - As avatar, favicon, seal, packaging, watermark — follow the minimum sizes.
 
@@ -152,14 +151,14 @@ Keep clear space equal to **1/4 of the badge radius** (i.e. 1/8 of the badge dia
 - ❌ Stretch, flatten, rotate, skew or mirror (breaks proportions).
 - ❌ Change colors or add gradients, shadows, outlines, outer glows.
 - ❌ Add any text on or adjacent to the mark (brand name, slogan, URL).
-- ❌ Replace structural elements: panda features, hat, red rim, etc.
+- ❌ Replace structural elements: panda features, straw hat, robe cloud embroidery, etc.
 - ❌ Enlarge a blurry or low-resolution image for use.
 - ❌ Make the "Bao" character thinner, taller, or change body proportions (must follow the mascot proportion red lines).
 
 **中文：**
 
 **允许**：
-- 彩色主标用于白底、浅色底；反白版用于深色底；单色版用于任何灰度场合。
+- 彩色主标用于白底、浅色底。
 - 等比缩放（不改变宽高比）。
 - 作为头像、favicon、印章、包装、水印时按最小尺寸执行。
 
@@ -167,22 +166,22 @@ Keep clear space equal to **1/4 of the badge radius** (i.e. 1/8 of the badge dia
 - ❌ 拉伸、压扁、旋转、倾斜、镜像（破坏比例）。
 - ❌ 改变颜色或添加渐变、阴影、描边、外发光。
 - ❌ 在标识上或紧邻处添加任何文字（品牌名、口号、网址）。
-- ❌ 替换熊猫五官、斗笠、红边等结构元素。
+- ❌ 替换熊猫五官、斗笠、服饰云纹等结构元素。
 - ❌ 用模糊、低分辨率图放大使用。
 - ❌ 将其「宝」形象改瘦、拔高或改变身材比例（须遵守吉祥物比例红线）。
 
 ---
 
-## 8. 可交付矢量 / Deliverable Vector
+## 8. 可交付 / Deliverable
 
 **English：**
 
-- The official master is provided as **SVG vector** (infinitely scalable; monochrome / reverse can be switched programmatically).
+- The master is currently provided as a **bitmap (white background)**; transparent PNG and SVG vector source files are recommended for production.
 - Recommended source files: SVG (vector) + PNG (bitmap, 1024/2048px).
 
 **中文：**
 
-- 正式母版提供 **SVG 矢量**（无限缩放、单色/反白可程序化切换）。
+- 主标目前为**位图（白底）**；正式生产建议输出透明底 PNG 与 SVG 矢量源文件。
 - 源文件建议：SVG（矢量）＋ PNG（位图，1024/2048px）。
 
 ---

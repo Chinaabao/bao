@@ -64,11 +64,11 @@ See [`docs/Bao_Whitepaper.md`](docs/Bao_Whitepaper.md) §6 for the full formula.
 
 **English：**
 
-The official Logo is a circular-badge straw-hat panda graphic mark (no text). Standards in [`docs/Bao_Logo_Specification.md`](docs/Bao_Logo_Specification.md) — color primary / black monochrome / white reverse, palette, minimum sizes, clear space, and prohibitions.
+The official Logo is a **panda bust head mark** (straw-hat Chinese-style panda, no text). Standards in [`docs/Bao_Logo_Specification.md`](docs/Bao_Logo_Specification.md) — color primary (jade-green robe + brown straw hat, white background), palette, minimum sizes, clear space, and prohibitions. Monochrome / reverse pending master finalization.
 
 **中文：**
 
-官方 Logo 为圆形徽章·斗笠熊猫图形标（不含文字）。标准参数见 [`docs/Bao_Logo_Specification.md`](docs/Bao_Logo_Specification.md)——含彩色主标 / 黑色单色版 / 白色反白版、标准色值、最小尺寸、安全区与禁止项。
+官方 Logo 为**熊猫半身头像标**（斗笠国风熊猫，不含文字）。标准参数见 [`docs/Bao_Logo_Specification.md`](docs/Bao_Logo_Specification.md)——含彩色主标（青绿中式服＋棕褐斗笠、白底）、标准色值、最小尺寸、安全区与禁止项。单色版/反白版待主标定稿后制作。
 
 ---
 
