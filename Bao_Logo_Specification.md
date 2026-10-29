@@ -31,10 +31,12 @@ This head mark is the single core identity (master). It is recognizable without 
 | Version | Description | Usage |
 |---|---|---|
 | **Color primary (master)** | Jade-green robe + brown straw hat, white background | Official default; website, whitepaper cover, avatar |
+| **Round mark** | Same panda bust inside a white circular backing | Badge, round avatar, seal, favicon (circular) |
 | Black monochrome | Pending — to be produced after master finalization | — |
 | White reverse | Pending — to be produced after master finalization | — |
 
 > Color primary (master): https://aka.doubaocdn.com/s/MFBVu32AVM
+> Round mark: https://aka.doubaocdn.com/s/kNSmFiJeh0
 > Monochrome / reverse versions will be produced once the master is finalized.
 
 **中文：**
@@ -42,10 +44,12 @@ This head mark is the single core identity (master). It is recognizable without 
 | 版本 | 说明 | 使用场景 |
 |---|---|---|
 | **彩色主标（标准版）** | 青绿中式服＋棕褐斗笠，白底 | 官方默认，官网、白皮书封面、头像 |
+| **圆形版** | 同一头像置于白色圆形衬底 | 徽章、圆形头像、印章、favicon（圆形场合） |
 | 黑色单色版 | 待主标定稿后另行制作 | — |
 | 白色反白版 | 待主标定稿后另行制作 | — |
 
 > 彩色主标：https://aka.doubaocdn.com/s/MFBVu32AVM
+> 圆形版：https://aka.doubaocdn.com/s/kNSmFiJeh0
 > 单色版／反白版将在主标最终确认后另行制作。
 
 ---
