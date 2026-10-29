@@ -40,19 +40,36 @@ def draw(holders, tx_hash, prize_sol, n_winners=3):
 
 
 def render_announcement(period, tx_hash, winners, amount_each, prize_sol, r, n):
-    return (
+    """生成中英双语开奖公示：英文版在前，中文版在后。"""
+    winners_lines = "\n".join(f"  #{i}  {w}" for i, w in enumerate(winners, 1))
+    en = (
+        "Bao ($BAO) Weekly Lucky Draw · Result Announcement\n"
+        f"Round: {period} | Prize pool: {prize_sol} SOL\n"
+        f"Seed tx hash: {tx_hash}\n"
+        f"Order: SHA256(addr+hash) lexicographic | r={r} | total votes {n}\n"
+        "-------------------------------------------\n"
+        f"Winners ({len(winners)}, {amount_each} SOL each):\n" +
+        winners_lines +
+        "\n-------------------------------------------\n"
+        "Review window: 3 days after publish (no re-draw on correction; "
+        "disqualified roll down by rank; remainder rolls into next round)\n"
+        "Payout: signed by the project wallet, per list and amount.\n"
+        "All data is verifiable on-chain; this notice remains on record permanently.\n"
+    )
+    zh = (
         "宝($BAO) 每周幸运抽奖 · 开奖公示\n"
         f"期次：{period}　奖池：{prize_sol} SOL\n"
         f"种子交易哈希：{tx_hash}\n"
         f"排序：SHA256(地址+哈希) 字典序　编号 r={r}　总票数 {n}\n"
         "-------------------------------------------\n"
         f"中奖者（{len(winners)} 人，各得 {amount_each} SOL）：\n" +
-        "\n".join(f"  #{i}  {w}" for i, w in enumerate(winners, 1)) +
+        winners_lines +
         "\n-------------------------------------------\n"
         "复查窗口：公布后 3 天（纠错不重抽，剔除者按排号顺延递补，差额滚入下期）\n"
         "发放：由项目方钱包签名，按名单与金额执行。\n"
         "全部数据链上可复核，本公示永久留痕。\n"
     )
+    return en + "\n" + zh
 
 
 def send_telegram(text, token, chat_id):
