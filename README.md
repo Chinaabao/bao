@@ -96,6 +96,16 @@ The official Logo is a circular-badge straw-hat panda graphic mark (no text). St
 - 每期填 `lottery/lottery_input.json`（参考 `lottery_input.example.json`）
 - 首次用 **Actions → Run workflow** 手动触发测试
 
+**每日奖池播报 / Daily Pool Announcement**（English）：
+
+`lottery/.github/workflows/bao-daily-pool.yml` sends a bilingual pool-balance announcement every day at 20:00 (UTC+8, 12:00 UTC), reporting the prize-pool address's current SOL balance as this week's accumulated pool.
+- Secrets: add `BAO_POOL_ADDRESS` (the prize-pool Solana address) once created; reuses `BAO_TG_BOT_TOKEN`, `BAO_TG_CHAT_ID`
+
+（中文）：
+
+`lottery/.github/workflows/bao-daily-pool.yml` 每天 20:00（UTC+8，即 12:00 UTC）发送一条中英双语奖池公告，播报奖池地址当前 SOL 持仓，作为本周奖池累积。
+- Secrets：建好奖池地址后，在 GitHub Secrets 添加 `BAO_POOL_ADDRESS`；复用 `BAO_TG_BOT_TOKEN`、`BAO_TG_CHAT_ID`
+
 ---
 
 ## 社区 / Community
