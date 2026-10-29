@@ -13,11 +13,9 @@ This is the public repository of the Bao ($BAO) project, hosting project docs an
 **English：**
 
 ```
-├── docs/                               # Project docs (standalone; whitepaper excludes roadmap & NFT)
+├── docs/                               # Project docs (standalone)
 │   ├── Bao_Whitepaper.md               # Full whitepaper (11 chapters, English-first Chinese-after)
-│   ├── Bao_Logo_Specification.md       # Logo standard (core/mono/reverse/colors/clear space)
-│   ├── Bao_Launch_Roadmap.md           # Launch & migration roadmap (standalone)
-│   └── Bao_Merchandise_NFT_Scheme.md   # Merch NFT technical plan (standalone)
+│   └── Bao_Logo_Specification.md       # Logo standard (core/mono/reverse/colors/clear space)
 └── lottery/                            # Weekly lucky draw
     ├── Bao_Weekly_Lottery_Whitepaper.md            # Lottery whitepaper (short external intro)
     ├── Bao_Weekly_Lottery_Formula.md               # Lottery formula & execution rules
@@ -30,11 +28,9 @@ This is the public repository of the Bao ($BAO) project, hosting project docs an
 **中文：**
 
 ```
-├── docs/                               # 项目文档（独立成篇，白皮书不含路线图与NFT）
+├── docs/                               # 项目文档（独立成篇）
 │   ├── Bao_Whitepaper.md               # 项目完整白皮书（11章，每章英文在前·中文在后）
-│   ├── Bao_Logo_Specification.md       # Logo 标准参数（核心图/单色/反白/色值/安全区）
-│   ├── Bao_Launch_Roadmap.md           # 上线与迁移路线图（独立文档）
-│   └── Bao_Merchandise_NFT_Scheme.md   # 周边NFT铸造技术方案（独立文档）
+│   └── Bao_Logo_Specification.md       # Logo 标准参数（核心图/单色/反白/色值/安全区）
 └── lottery/                            # 每周幸运抽奖
     ├── Bao_Weekly_Lottery_Whitepaper.md            # 抽奖白皮书（对外简短介绍）
     ├── Bao_Weekly_Lottery_Formula.md               # 抽奖公式与执行规则
