@@ -14,34 +14,34 @@ This is the public repository of the Bao ($BAO) project, hosting project docs an
 
 ```
 ├── docs/                               # Project docs (standalone; whitepaper excludes roadmap & NFT)
-│   ├── Bao_项目白皮书.md               # Full whitepaper (11 chapters, English-first Chinese-after)
-│   ├── Bao_Logo标准规范.md             # Logo standard (core/mono/reverse/colors/clear space)
-│   ├── 上线与迁移路线图.md             # Launch & migration roadmap (standalone)
-│   └── 周边NFT铸造技术方案.md           # Merch NFT technical plan (standalone)
+│   ├── Bao_Whitepaper.md               # Full whitepaper (11 chapters, English-first Chinese-after)
+│   ├── Bao_Logo_Specification.md       # Logo standard (core/mono/reverse/colors/clear space)
+│   ├── Bao_Launch_Roadmap.md           # Launch & migration roadmap (standalone)
+│   └── Bao_Merchandise_NFT_Scheme.md   # Merch NFT technical plan (standalone)
 └── lottery/                            # Weekly lucky draw
-    ├── Bao每周抽奖白皮书.md               # Lottery whitepaper (short external intro)
-    ├── 每周抽奖公式说明.md               # Lottery formula & execution rules
+    ├── Bao_Weekly_Lottery_Whitepaper.md            # Lottery whitepaper (short external intro)
+    ├── Bao_Weekly_Lottery_Formula.md               # Lottery formula & execution rules
     ├── scripts/bao_lottery.py          # Draw computation + auto Telegram post
-    ├── .github/workflows/bao-weekly-lottery.yml  # Weekly auto draw (Monday 00:00 UTC)
+    ├── .github/workflows/bao-weekly-lottery.yml    # Weekly auto draw (Monday 00:00 UTC)
     ├── lottery_input.example.json      # Per-round input template
-    └── Bao_每周抽奖公告模板_中英.md        # Bilingual announcement copy
+    └── Bao_Weekly_Lottery_Announcement_Template.md # Bilingual announcement copy
 ```
 
 **中文：**
 
 ```
 ├── docs/                               # 项目文档（独立成篇，白皮书不含路线图与NFT）
-│   ├── Bao_项目白皮书.md               # 项目完整白皮书（11章，每章英文在前·中文在后）
-│   ├── Bao_Logo标准规范.md             # Logo 标准参数（核心图/单色/反白/色值/安全区）
-│   ├── 上线与迁移路线图.md             # 上线与迁移路线图（独立文档）
-│   └── 周边NFT铸造技术方案.md           # 周边NFT铸造技术方案（独立文档）
+│   ├── Bao_Whitepaper.md               # 项目完整白皮书（11章，每章英文在前·中文在后）
+│   ├── Bao_Logo_Specification.md       # Logo 标准参数（核心图/单色/反白/色值/安全区）
+│   ├── Bao_Launch_Roadmap.md           # 上线与迁移路线图（独立文档）
+│   └── Bao_Merchandise_NFT_Scheme.md   # 周边NFT铸造技术方案（独立文档）
 └── lottery/                            # 每周幸运抽奖
-    ├── Bao每周抽奖白皮书.md               # 抽奖白皮书（对外简短介绍）
-    ├── 每周抽奖公式说明.md               # 抽奖公式与执行规则
+    ├── Bao_Weekly_Lottery_Whitepaper.md            # 抽奖白皮书（对外简短介绍）
+    ├── Bao_Weekly_Lottery_Formula.md               # 抽奖公式与执行规则
     ├── scripts/bao_lottery.py          # 开奖计算 + 自动发电报
-    ├── .github/workflows/bao-weekly-lottery.yml  # 每周一自动开奖
+    ├── .github/workflows/bao-weekly-lottery.yml    # 每周一自动开奖
     ├── lottery_input.example.json      # 每期输入模板
-    └── Bao_每周抽奖公告模板_中英.md        # 中英公告话术
+    └── Bao_Weekly_Lottery_Announcement_Template.md # 中英公告话术
 ```
 
 ---
@@ -55,7 +55,7 @@ This is the public repository of the Bao ($BAO) project, hosting project docs an
 - **Formula**: `SHA256(addr+hash)` lexicographic sort, `r=int(hash,16)%N+1`, take 3 cyclically to split the pool
 - **Payout**: signed by project wallet (the script only computes, it does not transfer)
 
-See [`lottery/每周抽奖公式说明.md`](lottery/每周抽奖公式说明.md).
+See [`lottery/Bao_Weekly_Lottery_Formula.md`](lottery/Bao_Weekly_Lottery_Formula.md).
 
 **中文：**
 
@@ -64,7 +64,7 @@ See [`lottery/每周抽奖公式说明.md`](lottery/每周抽奖公式说明.md)
 - **公式**：`SHA256(地址+哈希)` 字典序排序，`r=int(哈希,16)%N+1`，循环取 3 人平分奖池
 - **发放**：由项目方钱包签名执行（脚本只算不开奖转账）
 
-详见 [`lottery/每周抽奖公式说明.md`](lottery/每周抽奖公式说明.md)。
+详见 [`lottery/Bao_Weekly_Lottery_Formula.md`](lottery/Bao_Weekly_Lottery_Formula.md)。
 
 ---
 
@@ -72,11 +72,11 @@ See [`lottery/每周抽奖公式说明.md`](lottery/每周抽奖公式说明.md)
 
 **English：**
 
-The official Logo is a circular-badge straw-hat panda graphic mark (no text). Standards in [`docs/Bao_Logo标准规范.md`](docs/Bao_Logo标准规范.md) — color primary / black monochrome / white reverse, palette, minimum sizes, clear space, and prohibitions.
+The official Logo is a circular-badge straw-hat panda graphic mark (no text). Standards in [`docs/Bao_Logo_Specification.md`](docs/Bao_Logo_Specification.md) — color primary / black monochrome / white reverse, palette, minimum sizes, clear space, and prohibitions.
 
 **中文：**
 
-官方 Logo 为圆形徽章·斗笠熊猫图形标（不含文字）。标准参数见 [`docs/Bao_Logo标准规范.md`](docs/Bao_Logo标准规范.md)——含彩色主标 / 黑色单色版 / 白色反白版、标准色值、最小尺寸、安全区与禁止项。
+官方 Logo 为圆形徽章·斗笠熊猫图形标（不含文字）。标准参数见 [`docs/Bao_Logo_Specification.md`](docs/Bao_Logo_Specification.md)——含彩色主标 / 黑色单色版 / 白色反白版、标准色值、最小尺寸、安全区与禁止项。
 
 ---
 
