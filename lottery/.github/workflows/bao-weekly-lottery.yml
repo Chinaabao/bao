@@ -1,0 +1,37 @@
+name: Bao Weekly Lottery
+
+on:
+  # 每周一 00:00 UTC 自动开奖并发布到电报群（GitHub Actions 使用 UTC）
+  schedule:
+    - cron: "0 0 * * 1"
+  # 手动触发，便于首次上线时测试是否正常发电报
+  workflow_dispatch:
+
+jobs:
+  lottery:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run lottery & publish to Telegram
+        env:
+          BAO_TG_BOT_TOKEN: ${{ secrets.BAO_TG_BOT_TOKEN }}
+          BAO_TG_CHAT_ID: ${{ secrets.BAO_TG_CHAT_ID }}
+          LOTTERY_INPUT: lottery/lottery_input.json
+        run: python3 lottery/scripts/bao_lottery.py
+
+      - name: Upload announcement artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bao-announcement
+          path: |
+            announcement.txt
+            payouts.json
