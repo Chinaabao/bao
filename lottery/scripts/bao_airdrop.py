@@ -6,9 +6,14 @@
 流程：
   1. 用 X Bearer Token 拉取置顶推文评论区回复（Search API, conversation_id）
   2. 正则提取 Solana 地址并去重（同一地址只算一次）
-  3. 按固定数量生成空投清单
-  4. 中英双语公告到电报群
-  5. 用空投钱包私钥自动转账 $BAO（SPL token；未填私钥则只出清单不发）
+  3. 读取历史已空投地址（airdrop_history.json），剔除曾领过空投的钱包
+  4. 按固定数量生成空投清单（本次有效地址）
+  5. 中英双语公告到电报群
+  6. 仅当显式确认（CONFIRM_PAYOUT=yes）且有私钥+代币 mint 时，自动转账 $BAO
+     转账成功后将本次地址写入历史，防止重复空投
+
+历史文件 airdrop_history.json 保存在仓库中（透明、可审计、持久）：
+  - 每个钱包只能领取一次空投；已空投的地址在后续空投中自动剔除
 
 环境变量（由 GitHub Secrets / workflow 注入）：
   X_BEARER_TOKEN          X API Bearer Token
@@ -16,6 +21,8 @@
   AIRDROP_AMOUNT          每人空投 $BAO 数量（整数）
   AIRDROP_TOKEN_MINT      $BAO 代币 mint 地址
   AIRDROP_WALLET_PRIVKEY  空投钱包私钥（base58；不填则只出名单不转账）
+  CONFIRM_PAYOUT          是否确认发放：仅 "yes"/"true" 才执行转账（空投前人工确认）
+  AIRDROP_HISTORY_FILE    历史文件路径（默认 airdrop_history.json）
   AIRDROP_TOKEN_DECIMALS  $BAO 代币小数位（默认 6）
   SOLANA_RPC              Solana RPC 节点（默认公共主网）
   BAO_TG_BOT_TOKEN        电报 bot token
@@ -24,10 +31,11 @@
 用法：
   python3 scripts/bao_airdrop.py
 产出：
-  airdrop_list.json         合格空投清单（地址->数量）
+  airdrop_list.json         本次有效空投清单（地址->数量）
   airdrop_announcement.txt  中英双语公告
+  airdrop_transfers.json    转账结果（确认发放后）
+  airdrop_history.json      已空投地址历史（合并写回）
 """
-import base64
 import json
 import os
 import re
@@ -79,20 +87,49 @@ def extract_addresses(texts):
     return out
 
 
+# ---------- 历史去重（每个钱包只能领一次空投） ----------
+def load_history(path):
+    """读取历史已空投地址集合；文件不存在时返回空集合。"""
+    if not os.path.exists(path):
+        return set()
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    if isinstance(data, list):
+        return set(data)
+    return set(data.get("airdropped", []))
+
+
+def save_history(path, new_addresses):
+    """把本次已空投地址合并写回历史文件（与旧历史取并集，去重）。"""
+    old = load_history(path)
+    merged = sorted(old | set(new_addresses))
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump({"airdropped": merged}, f, indent=2)
+    return merged
+
+
 # ---------- 3. 公告 ----------
-def render_announcement(addresses, amount, winners):
-    en = (
-        "Bao ($BAO) Airdrop · Address Collection\n"
-        f"Qualified addresses from the pinned tweet comments: {len(addresses)}\n"
-        f"Each qualified address receives {amount} $BAO\n"
-        "List & amounts below; payout is executed by the airdrop wallet. All verifiable on-chain."
-    )
-    zh = (
-        "宝($BAO) 空投 · 地址收集\n"
-        f"从置顶推文评论区收集到合格地址：{len(addresses)} 个\n"
-        f"每个合格地址获得 {amount} $BAO\n"
-        "名单与数量如下，由空投钱包执行发放，全部链上可复核。"
-    )
+def render_announcement(collected, skipped, winners, amount):
+    en_lines = [
+        "Bao ($BAO) Airdrop · Address Collection",
+        f"Qualified addresses from the pinned tweet comments: {collected}",
+        f"Already-airdropped (skipped): {skipped}",
+        f"Valid this round: {len(winners)}",
+        f"Each valid address receives {amount} $BAO",
+    ]
+    if not winners:
+        en_lines.append("No new address this round.")
+    en = "\n".join(en_lines)
+    zh_lines = [
+        "宝($BAO) 空投 · 地址收集",
+        f"从置顶推文评论区收集到合格地址：{collected} 个",
+        f"历史已空投（剔除）：{skipped} 个",
+        f"本次有效地址：{len(winners)} 个",
+        f"每个有效地址获得 {amount} $BAO",
+    ]
+    if not winners:
+        zh_lines.append("本轮没有新地址。")
+    zh = "\n".join(zh_lines)
     body = en + "\n\n" + zh
     if winners:
         body += "\n\n" + "\n".join(f"• {addr}: {amount} $BAO" for addr in winners)
@@ -109,7 +146,7 @@ def send_telegram(text, token, chat_id):
 
 # ---------- 4. 自动转账 $BAO（SPL token） ----------
 def transfer_airdrop(privkey_b58, mint_b58, winners, amount, decimals):
-    """用空投钱包向每个合格地址转账 amount * $BAO。"""
+    """用空投钱包向每个有效地址转账 amount * $BAO。返回每笔结果列表。"""
     from solders.keypair import Keypair
     from solders.pubkey import Pubkey
     from solders.transaction import Transaction
@@ -155,24 +192,29 @@ def main():
     decimals = int(os.environ.get("AIRDROP_TOKEN_DECIMALS", "6"))
     token = os.environ.get("BAO_TG_BOT_TOKEN", "").strip()
     chat_id = os.environ.get("BAO_TG_CHAT_ID", "").strip()
+    history_file = os.environ.get("AIRDROP_HISTORY_FILE", "airdrop_history.json").strip()
+    confirm = os.environ.get("CONFIRM_PAYOUT", "").strip().lower() in ("yes", "true", "1")
 
     if not bearer or not tweet_id or not amount_str:
         raise SystemExit("缺少 X_BEARER_TOKEN / PINNED_TWEET_ID / AIRDROP_AMOUNT（请在 GitHub Secrets/变量设置）")
     amount = int(amount_str)
 
-    print("[1/3] 拉取置顶推文评论区...")
+    print("[1/4] 拉取置顶推文评论区...")
     texts = fetch_x_replies(bearer, tweet_id)
     print(f"  获取到 {len(texts)} 条回复")
 
-    print("[2/3] 提取并去重地址...")
+    print("[2/4] 提取并去重地址...")
     addresses = extract_addresses(texts)
     print(f"  提取到 {len(addresses)} 个唯一地址")
 
-    # 空投名单（每人固定数量）
-    winners = addresses
+    print("[3/4] 剔除历史已空投地址...")
+    history = load_history(history_file)
+    skipped = [a for a in addresses if a in history]
+    winners = [a for a in addresses if a not in history]
+    print(f"  历史已空投 {len(history)} 个；本次剔除 {len(skipped)} 个；本轮有效 {len(winners)} 个")
 
-    print("[3/3] 生成公告...")
-    text = render_announcement(addresses, amount, winners)
+    print("[4/4] 生成公告...")
+    text = render_announcement(len(addresses), len(skipped), winners, amount)
     with open("airdrop_list.json", "w", encoding="utf-8") as f:
         json.dump([{"address": a, "amount": amount} for a in winners], f, indent=2)
     with open("airdrop_announcement.txt", "w", encoding="utf-8") as f:
@@ -183,21 +225,30 @@ def main():
         res = send_telegram(text, token, chat_id)
         print("\n[电报公告]", "成功" if res.get("ok") else f"失败：{res}")
 
-    # 自动转账（仅当提供私钥与 mint）
-    if privkey and mint:
-        print("\n[空投发放] 开始自动转账...")
-        results = transfer_airdrop(privkey, mint, winners, amount, decimals)
-        ok = [r for r in results if "signature" in r]
-        fail = [r for r in results if "error" in r]
-        with open("airdrop_transfers.json", "w", encoding="utf-8") as f:
-            json.dump(results, f, indent=2)
-        print(f"  成功 {len(ok)} 笔 / 失败 {len(fail)} 笔（详见 airdrop_transfers.json）")
-        if ok:
-            text2 = render_announcement([], amount, []) + "\n" + (
-                f"✅ 空投发放完成：{len(ok)} 笔成功，{len(fail)} 笔失败。"
-            )
-            if token and chat_id:
-                send_telegram(text2, token, chat_id)
+    # 发放：需 私钥 + mint + 人工确认（CONFIRM_PAYOUT=yes）三者齐备才执行
+    if privkey and mint and confirm:
+        if not winners:
+            print("\n[空投发放] 本轮无新地址，跳过转账。")
+        else:
+            print(f"\n[空投发放] 已确认，开始自动转账 {len(winners)} 笔...")
+            results = transfer_airdrop(privkey, mint, winners, amount, decimals)
+            ok = [r for r in results if "signature" in r]
+            fail = [r for r in results if "error" in r]
+            with open("airdrop_transfers.json", "w", encoding="utf-8") as f:
+                json.dump(results, f, indent=2)
+            print(f"  成功 {len(ok)} 笔 / 失败 {len(fail)} 笔（详见 airdrop_transfers.json）")
+            # 只有成功转账的地址才写入历史，防止下次重复空投
+            if ok:
+                history_now = save_history(history_file, [r["address"] for r in ok])
+                print(f"  已更新历史：累计已空投 {len(history_now)} 个地址")
+                text2 = (
+                    f"✅ $BAO 空投发放完成：{len(ok)} 笔成功，{len(fail)} 笔失败。\n"
+                    f"累计已空投地址：{len(history_now)} 个（每个钱包仅限一次）"
+                )
+                if token and chat_id:
+                    send_telegram(text2, token, chat_id)
+    elif privkey and mint:
+        print("\n[空投发放] 未确认（CONFIRM_PAYOUT 未设为 yes），仅收集公告，不发放。请确认名单后勾选确认再运行。")
     else:
         print("\n[空投发放] 未提供私钥/代币 mint，仅生成名单，不转账（由项目方钱包手动执行）")
 

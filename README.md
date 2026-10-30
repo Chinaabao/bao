@@ -107,6 +107,7 @@ The official Logo is a **panda bust head mark** (straw-hat Chinese-style panda, 
 
 `lottery/.github/workflows/bao-airdrop.yml` 从 X 账号置顶推文评论区收集 Solana 地址、去重、按固定数量生成空投清单，发布中英双语公告，并（可选）由空投钱包自动发放 $BAO。通过 **Actions → Run workflow** 手动触发，运行时填写置顶推文 ID 与每人空投数量。
 - Secrets：`X_BEARER_TOKEN`、`AIRDROP_TOKEN_MINT`、`AIRDROP_WALLET_PRIVKEY`（base58；不填则只出清单不转账）
+- **规则**：每个钱包仅限领取一次空投（历史记录存于 `airdrop_history.json`，已空投地址自动剔除）；每次发放前需勾选"确认空投发放"才会真正转账，不勾选则只收集名单并公告，供人工核对。
 
 ---
 
