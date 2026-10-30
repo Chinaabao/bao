@@ -11,6 +11,7 @@ on:
       airdrop_amount:
         description: "每人空投 $BAO 数量"
         required: true
+        default: 1000
         type: number
       confirm_payout:
         description: "确认空投发放（勾选后才会自动转账；不勾选仅收集名单+公告）"
