@@ -1,0 +1,36 @@
+name: Bao Auto Tweet
+
+on:
+  # 手动触发：填写要发布的英文推文内容
+  workflow_dispatch:
+    inputs:
+      tweet_text:
+        description: "推文内容（英文，≤280 字符）"
+        required: true
+        type: string
+
+jobs:
+  post-tweet:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests requests-oauthlib
+
+      - name: Post tweet
+        env:
+          X_CONSUMER_KEY: ${{ secrets.X_CONSUMER_KEY }}
+          X_CONSUMER_SECRET: ${{ secrets.X_CONSUMER_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          X_TWEET_TEXT: ${{ github.event.inputs.tweet_text }}
+        run: python3 lottery/scripts/bao_tweet.py

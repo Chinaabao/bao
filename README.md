@@ -109,6 +109,16 @@ The official Logo is a **panda bust head mark** (straw-hat Chinese-style panda, 
 - Secrets：`X_BEARER_TOKEN`、`AIRDROP_TOKEN_MINT`、`AIRDROP_WALLET_PRIVKEY`（base58；不填则只出清单不转账）
 - **规则**：每个钱包仅限领取一次空投（历史记录存于 `airdrop_history.json`，已空投地址自动剔除）；每次发放前需勾选"确认空投发放"才会真正转账，不勾选则只收集名单并公告，供人工核对。
 
+**自动发推 / Auto Tweet**（English）：
+
+`lottery/.github/workflows/bao-tweet.yml` posts an English tweet to @Chinaabao via X API (OAuth 1.0a). Triggered manually via **Actions → Run workflow**, filling the tweet text (≤280 chars, English only; X built-in translation covers other languages).
+- Secrets: `X_CONSUMER_KEY`, `X_CONSUMER_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_TOKEN_SECRET`
+
+（中文）：
+
+`lottery/.github/workflows/bao-tweet.yml` 通过 X API（OAuth 1.0a 用户授权）向 @Chinaabao 发布英文推文。通过 **Actions → Run workflow** 手动触发，运行时填写推文内容（≤280 字符，全英文；X 自带翻译）。
+- Secrets：`X_CONSUMER_KEY`、`X_CONSUMER_SECRET`、`X_ACCESS_TOKEN`、`X_ACCESS_TOKEN_SECRET`
+
 ---
 
 ## 社区 / Community
