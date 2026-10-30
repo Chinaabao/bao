@@ -1,0 +1,33 @@
+name: bao-tg-collect
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"   # 每 10 分钟拉取一次 TG bot 收到的地址
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Collect addresses from TG bot
+        env:
+          BAO_TG_BOT_TOKEN: ${{ secrets.BAO_TG_BOT_TOKEN }}
+        run: python lottery/scripts/bao_tg_collect.py
+      - name: Commit collected addresses
+        run: |
+          git config user.name "Chinaabao"
+          git config user.email "Chinaabao@users.noreply.github.com"
+          git add lottery/data/tg_addresses.json
+          if git diff --cached --quiet; then
+            echo "No new address, skip commit."
+          else
+            git commit -m "Update TG-collected airdrop addresses"
+            git push origin HEAD
+          fi

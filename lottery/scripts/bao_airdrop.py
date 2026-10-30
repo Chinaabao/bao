@@ -87,6 +87,16 @@ def extract_addresses(texts):
     return out
 
 
+# ---------- 2.5 读取 Telegram 通道收集的地址 ----------
+def load_tg_addresses(path="lottery/data/tg_addresses.json"):
+    """读取 TG bot 收集的地址清单（双通道之一）；文件不存在时返回空列表。"""
+    if not os.path.exists(path):
+        return []
+    with open(path, "r", encoding="utf-8") as f:
+        d = json.load(f)
+    return d.get("addresses", [])
+
+
 # ---------- 历史去重（每个钱包只能领一次空投） ----------
 def load_history(path):
     """读取历史已空投地址集合；文件不存在时返回空集合。"""
@@ -203,9 +213,12 @@ def main():
     texts = fetch_x_replies(bearer, tweet_id)
     print(f"  获取到 {len(texts)} 条回复")
 
-    print("[2/4] 提取并去重地址...")
-    addresses = extract_addresses(texts)
-    print(f"  提取到 {len(addresses)} 个唯一地址")
+    print("[2/4] 提取并去重地址（X 评论区 + TG bot 双通道）...")
+    x_addresses = extract_addresses(texts)
+    tg_addresses = load_tg_addresses()
+    # 双通道合并、保持顺序去重（同一地址只记一次）
+    addresses = list(dict.fromkeys(x_addresses + tg_addresses))
+    print(f"  X 评论区 {len(x_addresses)} 个 / TG 收集 {len(tg_addresses)} 个 / 合并唯一 {len(addresses)} 个")
 
     print("[3/4] 剔除历史已空投地址...")
     history = load_history(history_file)
