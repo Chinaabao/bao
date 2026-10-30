@@ -98,6 +98,16 @@ The official Logo is a **panda bust head mark** (straw-hat Chinese-style panda, 
 `lottery/.github/workflows/bao-daily-pool.yml` 每天 20:00（UTC+8，即 12:00 UTC）发送一条中英双语奖池公告，播报奖池地址当前 SOL 持仓，作为本周奖池累积。
 - Secrets：建好奖池地址后，在 GitHub Secrets 添加 `BAO_POOL_ADDRESS`；复用 `BAO_TG_BOT_TOKEN`、`BAO_TG_CHAT_ID`
 
+**空投机器人 / Airdrop Bot**（English）：
+
+`lottery/.github/workflows/bao-airdrop.yml` collects Solana addresses from the pinned tweet comments of the X account, dedups them, generates a fixed-amount airdrop list, posts a bilingual announcement, and (optionally) auto-transfers $BAO from the airdrop wallet. Triggered manually via **Actions → Run workflow**, filling the pinned tweet ID and per-winner amount.
+- Secrets: `X_BEARER_TOKEN`, `AIRDROP_TOKEN_MINT`, `AIRDROP_WALLET_PRIVKEY` (base58; leave unset to only generate the list without transferring)
+
+（中文）：
+
+`lottery/.github/workflows/bao-airdrop.yml` 从 X 账号置顶推文评论区收集 Solana 地址、去重、按固定数量生成空投清单，发布中英双语公告，并（可选）由空投钱包自动发放 $BAO。通过 **Actions → Run workflow** 手动触发，运行时填写置顶推文 ID 与每人空投数量。
+- Secrets：`X_BEARER_TOKEN`、`AIRDROP_TOKEN_MINT`、`AIRDROP_WALLET_PRIVKEY`（base58；不填则只出清单不转账）
+
 ---
 
 ## 社区 / Community
