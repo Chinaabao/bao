@@ -1,138 +1,40 @@
-# Bao（$BAO · 宝）
+# Bao ($BAO) 🐼
 
-**English：**
-
-> **Mascot**: Chinese-style kung fu panda "Bao" (straw hat, jade-green frog-button robe, cloud pattern, red-knot tassel, wooden gourd, bundle & bamboo staff; 3D cute Chinese style)
-> **Slogan**: Everyone deserves a chance to be the lucky one — every week. · 每个人都值得成为幸运儿，每周都有机会。
-> **Chain**: Solana　**Supply**: 1,000,000,000 (fixed, never inflated)　**Launch**: all tokens to liquidity pool, no team reserve
-
-This is the public repository of the Bao ($BAO) project, hosting project docs and the weekly lottery automation.
-
-## 目录 / Table of Contents
-
-**English：**
-
-```
-├── docs/                               # Project docs (standalone)
-│   ├── Bao_Whitepaper.md               # Full whitepaper: project + weekly lottery (11 chapters, English-first Chinese-after)
-│   └── Bao_Logo_Specification.md       # Logo standard (core/mono/reverse/colors/clear space)
-└── lottery/                            # Weekly lucky draw
-    ├── scripts/bao_lottery.py          # Draw computation + auto Telegram post
-    ├── .github/workflows/bao-weekly-lottery.yml    # Weekly auto draw (Monday 00:00 UTC)
-    ├── lottery_input.example.json      # Per-round input template
-    └── Bao_Weekly_Lottery_Announcement_Template.md # Bilingual announcement copy
-```
-
-**中文：**
-
-```
-├── docs/                               # 项目文档（独立成篇）
-│   ├── Bao_Whitepaper.md               # 完整白皮书（项目+每周抽奖机制，11章，英文在前·中文在后）
-│   └── Bao_Logo_Specification.md       # Logo 标准参数（核心图/单色/反白/色值/安全区）
-└── lottery/                            # 每周幸运抽奖
-    ├── scripts/bao_lottery.py          # 开奖计算 + 自动发电报
-    ├── .github/workflows/bao-weekly-lottery.yml    # 每周一自动开奖
-    ├── lottery_input.example.json      # 每期输入模板
-    └── Bao_Weekly_Lottery_Announcement_Template.md # 中英公告话术
-```
+**The lucky kung-fu panda on Solana.**
+**宝($BAO)——Solana 上的幸运功夫熊猫。**
 
 ---
 
-## 每周抽奖 / Weekly Lottery
+## About / 关于
 
-**English：**
+Bao is a community memecoin built on Solana. Every week, an on-chain lottery draws a random SHA256 hash to pick a winner, and the prize pool keeps growing. Anyone can win — it could be you.
 
-- **Eligibility**: market value ≥ $100 at snapshot (Monday 00:00 UTC), one person one vote
-- **Seed**: first confirmed tx hash after Monday 00:00 (transparent & verifiable)
-- **Formula**: `SHA256(addr+hash)` lexicographic sort, `r=int(hash,16)%N+1`, take 3 cyclically to split the pool
-- **Payout**: signed by project wallet (the script only computes, it does not transfer)
+宝是一款基于 Solana 的社区迷因币。每周，链上抽奖会抽取一个随机 SHA256 哈希来决定赢家，奖池持续增长。任何人都可能中奖——也许就是你。
 
-See [`docs/Bao_Whitepaper.md`](docs/Bao_Whitepaper.md) §6 for the full formula.
+## Official Contract / 官方合约
 
-**中文：**
+```
+5Bav69r4PqMLstPiunjs81nXctXYnJAKb31wLCpPpump
+```
 
-- **资格**：快照时（周一 00:00 UTC）持仓市值 ≥ $100，一人一票
-- **种子**：周一 00:00 后第一个确认交易哈希（透明可复核）
-- **公式**：`SHA256(地址+哈希)` 字典序排序，`r=int(哈希,16)%N+1`，循环取 3 人平分奖池
-- **发放**：由项目方钱包签名执行（脚本只算不开奖转账）
+Only trust this address. Please verify carefully before interacting.
 
-完整公式见 [`docs/Bao_Whitepaper.md`](docs/Bao_Whitepaper.md) 第 6 章。
+请认准此官方地址。交互前请仔细核对。
 
----
+## Community / 社区
 
-## Logo 标准 / Logo Standard
+- **X (Twitter):** https://x.com/Chinaabao
+- **Telegram:** https://t.me/Chinaabao
 
-**English：**
+## Docs / 文档
 
-The official Logo is a **panda bust head mark** (straw-hat Chinese-style panda, no text), with a **round mark variant**. Standards in [`docs/Bao_Logo_Specification.md`](docs/Bao_Logo_Specification.md) — color primary (jade-green robe + brown straw hat, white background), round mark, palette, minimum sizes, clear space, and prohibitions. Monochrome / reverse pending master finalization.
-
-**中文：**
-
-官方 Logo 为**熊猫半身头像标**（斗笠国风熊猫，不含文字），并含**圆形版变体**。标准参数见 [`docs/Bao_Logo_Specification.md`](docs/Bao_Logo_Specification.md)——含彩色主标（青绿中式服＋棕褐斗笠、白底）、圆形版、标准色值、最小尺寸、安全区与禁止项。单色版/反白版待主标定稿后制作。
+- **Whitepaper / 白皮书:** [docs/Bao_Whitepaper.md](docs/Bao_Whitepaper.md)
+- **Logo Specification / Logo 规范:** [docs/Bao_Logo_Specification.md](docs/Bao_Logo_Specification.md)
 
 ---
 
-## 自动化 / Automation
+## Disclaimer / 免责声明
 
-**English：**
+$BAO is a memecoin for community entertainment. Its value is highly volatile and may lose most or all of its value at any time. Nothing in this repository constitutes financial advice. Please do your own research.
 
-`lottery/.github/workflows/bao-weekly-lottery.yml` triggers every Monday 00:00 UTC to auto-draw and post to the Bao Telegram group.
-- Secrets: `BAO_TG_BOT_TOKEN`, `BAO_TG_CHAT_ID`
-- Fill `lottery/lottery_input.json` each round (see `lottery_input.example.json`)
-- First run: test via **Actions → Run workflow**
-
-**中文：**
-
-`lottery/.github/workflows/bao-weekly-lottery.yml` 每周一 00:00 UTC 自动开奖并发布到宝的电报群。
-- Secrets：`BAO_TG_BOT_TOKEN`、`BAO_TG_CHAT_ID`
-- 每期填 `lottery/lottery_input.json`（参考 `lottery_input.example.json`）
-- 首次用 **Actions → Run workflow** 手动触发测试
-
-**每日奖池播报 / Daily Pool Announcement**（English）：
-
-`lottery/.github/workflows/bao-daily-pool.yml` sends a bilingual pool-balance announcement every day at 20:00 (UTC+8, 12:00 UTC), reporting the prize-pool address's current SOL balance as this week's accumulated pool.
-- Secrets: add `BAO_POOL_ADDRESS` (the prize-pool Solana address) once created; reuses `BAO_TG_BOT_TOKEN`, `BAO_TG_CHAT_ID`
-
-（中文）：
-
-`lottery/.github/workflows/bao-daily-pool.yml` 每天 20:00（UTC+8，即 12:00 UTC）发送一条中英双语奖池公告，播报奖池地址当前 SOL 持仓，作为本周奖池累积。
-- Secrets：建好奖池地址后，在 GitHub Secrets 添加 `BAO_POOL_ADDRESS`；复用 `BAO_TG_BOT_TOKEN`、`BAO_TG_CHAT_ID`
-
-**空投机器人 / Airdrop Bot**（English）：
-
-`lottery/.github/workflows/bao-airdrop.yml` collects Solana addresses from the pinned tweet comments of the X account, dedups them, generates a fixed-amount airdrop list, posts a bilingual announcement, and (optionally) auto-transfers $BAO from the airdrop wallet. Triggered manually via **Actions → Run workflow**, filling the pinned tweet ID and per-winner amount.
-- Secrets: `X_BEARER_TOKEN`, `AIRDROP_TOKEN_MINT`, `AIRDROP_WALLET_PRIVKEY` (base58; leave unset to only generate the list without transferring)
-
-（中文）：
-
-`lottery/.github/workflows/bao-airdrop.yml` 从 X 账号置顶推文评论区收集 Solana 地址、去重、按固定数量生成空投清单，发布中英双语公告，并（可选）由空投钱包自动发放 $BAO。通过 **Actions → Run workflow** 手动触发，运行时填写置顶推文 ID 与每人空投数量。
-- Secrets：`X_BEARER_TOKEN`、`AIRDROP_TOKEN_MINT`、`AIRDROP_WALLET_PRIVKEY`（base58；不填则只出清单不转账）
-- **规则**：每个钱包仅限领取一次空投（历史记录存于 `airdrop_history.json`，已空投地址自动剔除）；每次发放前需勾选"确认空投发放"才会真正转账，不勾选则只收集名单并公告，供人工核对。
-
-**自动发推 / Auto Tweet**（English）：
-
-`lottery/.github/workflows/bao-tweet.yml` posts an English tweet to @Chinaabao via X API (OAuth 1.0a). Triggered manually via **Actions → Run workflow**, filling the tweet text (≤280 chars, English only; X built-in translation covers other languages).
-- Secrets: `X_CONSUMER_KEY`, `X_CONSUMER_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_TOKEN_SECRET`
-
-（中文）：
-
-`lottery/.github/workflows/bao-tweet.yml` 通过 X API（OAuth 1.0a 用户授权）向 @Chinaabao 发布英文推文。通过 **Actions → Run workflow** 手动触发，运行时填写推文内容（≤280 字符，全英文；X 自带翻译）。
-- Secrets：`X_CONSUMER_KEY`、`X_CONSUMER_SECRET`、`X_ACCESS_TOKEN`、`X_ACCESS_TOKEN_SECRET`
-
----
-
-## 社区 / Community
-
-**English：**
-
-- X: https://x.com/Chinaabao
-- Telegram: https://t.me/Chinaabao
-
-> Disclaimer: this whitepaper & mechanics are designed for offshore compliance (incl. "Not for US persons"); please follow the laws of your jurisdiction.
-
-**中文：**
-
-- X：https://x.com/Chinaabao
-- Telegram：https://t.me/Chinaabao
-
-> 声明：本白皮书与机制按境外合规设计（含 "Not for US persons"），请遵守所在地法律。
+$BAO 是一款面向社区娱乐的迷因币。其价值波动剧烈，随时可能大幅贬值甚至归零。本仓库中的任何内容均不构成投资建议，请自行判断与决策。
